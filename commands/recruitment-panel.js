@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
+import { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder } from 'discord.js';
 
 export default {
   data: new SlashCommandBuilder()
@@ -9,29 +9,37 @@ export default {
     const embed = new EmbedBuilder()
       .setColor('#0099ff')
       .setTitle('Recrutement - Verlaine Roleplay')
-      .setDescription('Bienvenue dans le système de recrutement staff.\n\nChoisissez la catégorie qui vous intéresse dans le menu ci-dessous, puis remplissez le formulaire.\n\n**Catégories disponibles :**\n- **Modérateur Test** *(ouvert)*\n- **Développeur** *(ouvert)*\n- **Communication** *(ouvert)*\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n🟢 Modérateur Test\n🟢 Développeur\n🟢 Communication')
+      .setDescription('Bienvenue dans le système de recrutement staff.\n\nChoisissez la catégorie qui vous intéresse dans le menu ci-dessous, puis remplissez le formulaire.\n\n**Catégories disponibles :**\n- Modérateur Test *(ouvert)*\n- Développeur\n*(ouvert)*\n- Communication *(ouvert)*')
       .setFooter({ text: 'Verlaine RP - Recrutement' })
       .setTimestamp();
 
-    const buttons = new ActionRowBuilder()
+    const selectMenu = new ActionRowBuilder()
       .addComponents(
-        new ButtonBuilder()
-          .setCustomId('recruit_mod_menu')
-          .setLabel('Modérateur Test')
-          .setStyle(ButtonStyle.Primary)
-          .setEmoji('1504962828019437738'),
-        new ButtonBuilder()
-          .setCustomId('recruit_dev_menu')
-          .setLabel('Développeur')
-          .setStyle(ButtonStyle.Primary)
-          .setEmoji('1505204315814363307'),
-        new ButtonBuilder()
-          .setCustomId('recruit_com_menu')
-          .setLabel('Communication')
-          .setStyle(ButtonStyle.Primary)
-          .setEmoji('1505241226083831848')
+        new StringSelectMenuBuilder()
+          .setCustomId('recruit_select')
+          .setPlaceholder('Sélectionnez une catégorie')
+          .addOptions(
+            {
+              label: 'Modérateur Test',
+              value: 'recruit_mod',
+              emoji: '1504962828019437738',
+              description: 'Rejoignez l\'équipe de modération'
+            },
+            {
+              label: 'Développeur',
+              value: 'recruit_dev',
+              emoji: '1505204315814363307',
+              description: 'Proposez vos services de développement'
+            },
+            {
+              label: 'Communication',
+              value: 'recruit_com',
+              emoji: '1505241226083831848',
+              description: 'Rejoignez l\'équipe de communication'
+            }
+          )
       );
 
-    await interaction.reply({ embeds: [embed], components: [buttons] });
+    await interaction.reply({ embeds: [embed], components: [selectMenu] });
   }
 };

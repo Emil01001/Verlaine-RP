@@ -1,39 +1,32 @@
-import { ChannelType, PermissionFlagsBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, TextInputBuilder, TextInputStyle } from 'discord.js';
+import { ChannelType, PermissionFlagsBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 
 export async function handleTicketButtons(client) {
   client.on('interactionCreate', async (interaction) => {
-    if (!interaction.isButton()) return;
-
     try {
+      // Handle select menus
+      if (interaction.isStringSelectMenu()) {
+        const value = interaction.values[0];
+
+        if (value === 'ticket_admin') {
+          await showAdminForm(interaction);
+        } else if (value === 'ticket_partner') {
+          await showPartnerForm(interaction);
+        } else if (value === 'ticket_other') {
+          await showOtherForm(interaction);
+        } else if (value === 'recruit_mod') {
+          await showModForm(interaction);
+        } else if (value === 'recruit_dev') {
+          await showDevForm(interaction);
+        } else if (value === 'recruit_com') {
+          await showComForm(interaction);
+        }
+        return;
+      }
+
+      // Handle buttons
+      if (!interaction.isButton()) return;
+
       const buttonId = interaction.customId;
-
-      // Support ticket menus
-      if (buttonId === 'ticket_admin_menu') {
-        await showAdminForm(interaction);
-        return;
-      }
-      if (buttonId === 'ticket_partner_menu') {
-        await showPartnerForm(interaction);
-        return;
-      }
-      if (buttonId === 'ticket_other_menu') {
-        await showOtherForm(interaction);
-        return;
-      }
-
-      // Recruitment menus
-      if (buttonId === 'recruit_mod_menu') {
-        await showModForm(interaction);
-        return;
-      }
-      if (buttonId === 'recruit_dev_menu') {
-        await showDevForm(interaction);
-        return;
-      }
-      if (buttonId === 'recruit_com_menu') {
-        await showComForm(interaction);
-        return;
-      }
 
       // Submit buttons
       if (buttonId.startsWith('submit_')) {
@@ -49,8 +42,12 @@ export async function handleTicketButtons(client) {
       }
     } catch (error) {
       console.error('Erreur interaction:', error);
-      if (!interaction.replied) {
-        await interaction.reply({ content: '❌ Une erreur est survenue', ephemeral: true }).catch(() => {});
+      try {
+        if (!interaction.replied && !interaction.deferred) {
+          await interaction.reply({ content: '❌ Une erreur est survenue', ephemeral: true });
+        }
+      } catch (e) {
+        console.error('Erreur reply:', e);
       }
     }
   });
@@ -171,55 +168,62 @@ async function showComForm(interaction) {
 }
 
 async function createTicket(interaction, type) {
-  const guild = interaction.guild;
-  const user = interaction.user;
+  try {
+    const guild = interaction.guild;
+    const user = interaction.user;
 
-  const ticketNames = {
-    admin: 'support-admin',
-    partner: 'support-partner',
-    other: 'support-autre',
-    mod: 'candidature-mod',
-    dev: 'candidature-dev',
-    com: 'candidature-com'
-  };
+    const ticketNames = {
+      admin: 'support-admin',
+      partner: 'support-partner',
+      other: 'support-autre',
+      mod: 'candidature-mod',
+      dev: 'candidature-dev',
+      com: 'candidature-com'
+    };
 
-  const channelName = `${ticketNames[type]}-${user.username}`;
+    const channelName = `${ticketNames[type]}-${user.username}`;
 
-  const channel = await guild.channels.create({
-    name: channelName,
-    type: ChannelType.GuildText,
-    parent: '1504938519292940370',
-    permissionOverwrites: [
-      {
-        id: guild.id,
-        deny: [PermissionFlagsBits.ViewChannel],
-      },
-      {
-        id: user.id,
-        allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages, PermissionFlagsBits.ReadMessageHistory],
-      },
-    ],
-  });
+    const channel = await guild.channels.create({
+      name: channelName,
+      type: ChannelType.GuildText,
+      parent: '1504938519292940370',
+      permissionOverwrites: [
+        {
+          id: guild.id,
+          deny: [PermissionFlagsBits.ViewChannel],
+        },
+        {
+          id: user.id,
+          allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages, PermissionFlagsBits.ReadMessageHistory],
+        },
+      ],
+    });
 
-  const questions = getQuestions(type);
+    const questions = getQuestions(type);
 
-  const embed = new EmbedBuilder()
-    .setColor('#0099ff')
-    .setTitle(getTitleForType(type))
-    .setDescription(`Bienvenue ${user}!\n\n**Veuillez répondre aux questions suivantes:**\n\n${questions.join('\n')}`)
-    .setFooter({ text: 'Verlaine RP' })
-    .setTimestamp();
+    const embed = new EmbedBuilder()
+      .setColor('#0099ff')
+      .setTitle(getTitleForType(type))
+      .setDescription(`Bienvenue ${user}!\n\n**Veuillez répondre aux questions suivantes:**\n\n${questions.join('\n')}`)
+      .setFooter({ text: 'Verlaine RP' })
+      .setTimestamp();
 
-  const closeButton = new ActionRowBuilder()
-    .addComponents(
-      new ButtonBuilder()
-        .setCustomId('close_ticket')
-        .setLabel('Fermer le ticket')
-        .setStyle(ButtonStyle.Danger)
-    );
+    const closeButton = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setCustomId('close_ticket')
+          .setLabel('Fermer le ticket')
+          .setStyle(ButtonStyle.Danger)
+      );
 
-  await channel.send({ embeds: [embed], components: [closeButton] });
-  await interaction.reply({ content: `✅ Ticket créé: ${channel}`, ephemeral: true });
+    await channel.send({ embeds: [embed], components: [closeButton] });
+    await interaction.reply({ content: `✅ Ticket créé: ${channel}`, ephemeral: true });
+  } catch (error) {
+    console.error('Erreur création ticket:', error);
+    if (!interaction.replied) {
+      await interaction.reply({ content: '❌ Erreur lors de la création du ticket', ephemeral: true });
+    }
+  }
 }
 
 function getTitleForType(type) {
