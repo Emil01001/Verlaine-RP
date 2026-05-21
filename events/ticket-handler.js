@@ -4,39 +4,54 @@ export async function handleTicketButtons(client) {
   client.on('interactionCreate', async (interaction) => {
     if (!interaction.isButton()) return;
 
-    const buttonId = interaction.customId;
+    try {
+      const buttonId = interaction.customId;
 
-    // Support ticket menus
-    if (buttonId === 'ticket_admin_menu') {
-      await showAdminForm(interaction);
-    }
-    if (buttonId === 'ticket_partner_menu') {
-      await showPartnerForm(interaction);
-    }
-    if (buttonId === 'ticket_other_menu') {
-      await showOtherForm(interaction);
-    }
+      // Support ticket menus
+      if (buttonId === 'ticket_admin_menu') {
+        await showAdminForm(interaction);
+        return;
+      }
+      if (buttonId === 'ticket_partner_menu') {
+        await showPartnerForm(interaction);
+        return;
+      }
+      if (buttonId === 'ticket_other_menu') {
+        await showOtherForm(interaction);
+        return;
+      }
 
-    // Recruitment menus
-    if (buttonId === 'recruit_mod_menu') {
-      await showModForm(interaction);
-    }
-    if (buttonId === 'recruit_dev_menu') {
-      await showDevForm(interaction);
-    }
-    if (buttonId === 'recruit_com_menu') {
-      await showComForm(interaction);
-    }
+      // Recruitment menus
+      if (buttonId === 'recruit_mod_menu') {
+        await showModForm(interaction);
+        return;
+      }
+      if (buttonId === 'recruit_dev_menu') {
+        await showDevForm(interaction);
+        return;
+      }
+      if (buttonId === 'recruit_com_menu') {
+        await showComForm(interaction);
+        return;
+      }
 
-    // Submit buttons
-    if (buttonId.startsWith('submit_')) {
-      const type = buttonId.replace('submit_', '');
-      await createTicket(interaction, type);
-    }
+      // Submit buttons
+      if (buttonId.startsWith('submit_')) {
+        const type = buttonId.replace('submit_', '');
+        await createTicket(interaction, type);
+        return;
+      }
 
-    // Close ticket
-    if (buttonId === 'close_ticket') {
-      await interaction.channel.delete();
+      // Close ticket
+      if (buttonId === 'close_ticket') {
+        await interaction.channel.delete();
+        return;
+      }
+    } catch (error) {
+      console.error('Erreur interaction:', error);
+      if (!interaction.replied) {
+        await interaction.reply({ content: '❌ Une erreur est survenue', ephemeral: true }).catch(() => {});
+      }
     }
   });
 }

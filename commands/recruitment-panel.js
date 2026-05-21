@@ -9,8 +9,7 @@ export default {
     const embed = new EmbedBuilder()
       .setColor('#0099ff')
       .setTitle('Recrutement - Verlaine Roleplay')
-      .setDescription('Bienvenue dans le système de recrutement staff.\n\nChoisissez la catégorie qui vous intéresse dans le menu ci-dessous, puis remplissez le formulaire.\n\n**Catégories disponibles :**\n- **Modérateur Test** *(ouvert)*\n- **Développeur** *(ouvert)*\n- **Communication** *(ouvert)*\n\n🟢 Modérateur Test\n🟢 Développeur\n🟢 Communication')
-      .setThumbnail('https://cdn.discordapp.com/emojis/1505190731386720387.png')
+      .setDescription('Bienvenue dans le système de recrutement staff.\n\nChoisissez la catégorie qui vous intéresse dans le menu ci-dessous, puis remplissez le formulaire.\n\n**Catégories disponibles :**\n- **Modérateur Test** *(ouvert)*\n- **Développeur** *(ouvert)*\n- **Communication** *(ouvert)*\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n🟢 Modérateur Test\n🟢 Développeur\n🟢 Communication')
       .setFooter({ text: 'Verlaine RP - Recrutement' })
       .setTimestamp();
 
