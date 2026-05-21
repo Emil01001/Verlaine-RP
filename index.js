@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Variables d'environnement
-const TOKEN = process.env.DISCORD_BOT_TOKEN || 'MTUwNDkzNTU3NDY2OTM2NTQ2Mw.GWbuY-.kHpIGwa6R129RDyn0Md1ytu8WCm_HdAgncseRM';
+const TOKEN = process.env.DISCORD_BOT_TOKEN;
 const GUILD_ID = process.env.DISCORD_GUILD_ID || '1505517985715195924';
 const APP_ID = process.env.VITE_APP_ID || '1504935574669365463';
 
