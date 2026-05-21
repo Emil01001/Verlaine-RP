@@ -1,0 +1,17 @@
+{
+  "name": "verlaine-rp-bot",
+  "version": "1.0.0",
+  "description": "Bot Discord Verlaine RP",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "keywords": ["discord", "bot", "verlaine"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.14.0"
+  }
+}

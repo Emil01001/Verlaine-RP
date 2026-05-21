@@ -1,0 +1,46 @@
+🚀 Démarrage du bot Verlaine RP...
+📂 Chargement de 32 commandes...
+  ✅ boost
+  ✅ help
+  ✅ ping
+  ✅ recruitment-apply
+  ✅ recruitment
+  ✅ rp-balance
+  ✅ rp-bank
+  ✅ rp-casino
+  ✅ rp-crime
+  ✅ rp-crypto
+  ✅ rp-doctor
+  ✅ rp-economy
+  ✅ rp-events
+  ✅ rp-friends
+  ✅ rp-gym
+  ✅ rp-health
+  ✅ rp-job
+  ✅ rp-lawyer
+  ✅ rp-legal
+  ✅ rp-marriage
+  ✅ rp-mechanic
+  ✅ rp-org
+  ✅ rp-police
+  ✅ rp-profile
+  ✅ rp-property
+  ✅ rp-realtor
+  ✅ rp-restaurant
+  ✅ rp-school
+  ✅ rp-taxi
+  ✅ rp-vehicle
+  ✅ ticket-create
+  ✅ ticket
+✅ 32 commandes chargées
+
+📝 Enregistrement de 32 commandes...
+❌ Erreur enregistrement: Invalid Form Body
+application_id[NUMBER_TYPE_COERCE]: Value "dPRixpkUXKgUrXx8wiAvRe" is not snowflake.
+✅ BOT CONNECTÉ: Paris Simulation#0598
+📊 Serveur: 1504930010417467535
+🎮 Statut: En ligne
+
+(node:44845) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+⚠️ Commande inconnue: rp
