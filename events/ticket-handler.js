@@ -54,117 +54,153 @@ export async function handleTicketButtons(client) {
 }
 
 async function showAdminForm(interaction) {
-  const embed = new EmbedBuilder()
-    .setColor('#0099ff')
-    .setTitle('Administration - Formulaire')
-    .setDescription('**Questions à remplir:**\n\n1️⃣ Quel est votre problème?\n2️⃣ Depuis quand rencontrez-vous ce problème?\n3️⃣ Avez-vous des preuves (screenshots, vidéos)?\n4️⃣ Avez-vous déjà contacté un modérateur?\n5️⃣ Informations supplémentaires?')
-    .setFooter({ text: 'Verlaine RP - Support' })
-    .setTimestamp();
+  try {
+    await interaction.deferReply({ ephemeral: true });
+    
+    const embed = new EmbedBuilder()
+      .setColor('#0099ff')
+      .setTitle('Administration - Formulaire')
+      .setDescription('**Questions à remplir:**\n\n1️⃣ Quel est votre problème?\n2️⃣ Depuis quand rencontrez-vous ce problème?\n3️⃣ Avez-vous des preuves (screenshots, vidéos)?\n4️⃣ Avez-vous déjà contacté un modérateur?\n5️⃣ Informations supplémentaires?')
+      .setFooter({ text: 'Verlaine RP - Support' })
+      .setTimestamp();
 
-  const button = new ActionRowBuilder()
-    .addComponents(
-      new ButtonBuilder()
-        .setCustomId('submit_admin')
-        .setLabel('Créer le ticket')
-        .setStyle(ButtonStyle.Success)
-    );
+    const button = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setCustomId('submit_admin')
+          .setLabel('Créer le ticket')
+          .setStyle(ButtonStyle.Success)
+      );
 
-  await interaction.reply({ embeds: [embed], components: [button], ephemeral: true });
+    await interaction.editReply({ embeds: [embed], components: [button] });
+  } catch (error) {
+    console.error('Erreur showAdminForm:', error);
+  }
 }
 
 async function showPartnerForm(interaction) {
-  const embed = new EmbedBuilder()
-    .setColor('#0099ff')
-    .setTitle('Partenariat Développement - Formulaire')
-    .setDescription('**Questions à remplir:**\n\n1️⃣ Nom de votre projet/entreprise?\n2️⃣ Quel type de partenariat recherchez-vous?\n3️⃣ Votre portfolio/site web?\n4️⃣ Vos compétences principales?\n5️⃣ Budget/propositions?')
-    .setFooter({ text: 'Verlaine RP - Support' })
-    .setTimestamp();
+  try {
+    await interaction.deferReply({ ephemeral: true });
+    
+    const embed = new EmbedBuilder()
+      .setColor('#0099ff')
+      .setTitle('Partenariat Développement - Formulaire')
+      .setDescription('**Questions à remplir:**\n\n1️⃣ Nom de votre projet/entreprise?\n2️⃣ Quel type de partenariat recherchez-vous?\n3️⃣ Votre portfolio/site web?\n4️⃣ Vos compétences principales?\n5️⃣ Budget/propositions?')
+      .setFooter({ text: 'Verlaine RP - Support' })
+      .setTimestamp();
 
-  const button = new ActionRowBuilder()
-    .addComponents(
-      new ButtonBuilder()
-        .setCustomId('submit_partner')
-        .setLabel('Créer le ticket')
-        .setStyle(ButtonStyle.Success)
-    );
+    const button = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setCustomId('submit_partner')
+          .setLabel('Créer le ticket')
+          .setStyle(ButtonStyle.Success)
+      );
 
-  await interaction.reply({ embeds: [embed], components: [button], ephemeral: true });
+    await interaction.editReply({ embeds: [embed], components: [button] });
+  } catch (error) {
+    console.error('Erreur showPartnerForm:', error);
+  }
 }
 
 async function showOtherForm(interaction) {
-  const embed = new EmbedBuilder()
-    .setColor('#0099ff')
-    .setTitle('Ticket Autre - Formulaire')
-    .setDescription('**Questions à remplir:**\n\n1️⃣ Sujet de votre demande?\n2️⃣ Description détaillée?\n3️⃣ Avez-vous des preuves?\n4️⃣ Urgence de la demande?\n5️⃣ Informations supplémentaires?')
-    .setFooter({ text: 'Verlaine RP - Support' })
-    .setTimestamp();
+  try {
+    await interaction.deferReply({ ephemeral: true });
+    
+    const embed = new EmbedBuilder()
+      .setColor('#0099ff')
+      .setTitle('Ticket Autre - Formulaire')
+      .setDescription('**Questions à remplir:**\n\n1️⃣ Sujet de votre demande?\n2️⃣ Description détaillée?\n3️⃣ Avez-vous des preuves?\n4️⃣ Urgence de la demande?\n5️⃣ Informations supplémentaires?')
+      .setFooter({ text: 'Verlaine RP - Support' })
+      .setTimestamp();
 
-  const button = new ActionRowBuilder()
-    .addComponents(
-      new ButtonBuilder()
-        .setCustomId('submit_other')
-        .setLabel('Créer le ticket')
-        .setStyle(ButtonStyle.Success)
-    );
+    const button = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setCustomId('submit_other')
+          .setLabel('Créer le ticket')
+          .setStyle(ButtonStyle.Success)
+      );
 
-  await interaction.reply({ embeds: [embed], components: [button], ephemeral: true });
+    await interaction.editReply({ embeds: [embed], components: [button] });
+  } catch (error) {
+    console.error('Erreur showOtherForm:', error);
+  }
 }
 
 async function showModForm(interaction) {
-  const embed = new EmbedBuilder()
-    .setColor('#0099ff')
-    .setTitle('Modérateur Test - Formulaire')
-    .setDescription('**Questions à remplir:**\n\n1️⃣ Quel est votre nom Roblox?\n2️⃣ Depuis combien de temps jouez-vous au RP?\n3️⃣ Pourquoi voulez-vous être modérateur?\n4️⃣ Avez-vous de l\'expérience en modération?\n5️⃣ Décrivez une situation où vous avez dû gérer un conflit.\n6️⃣ Avez-vous des références?')
-    .setFooter({ text: 'Verlaine RP - Recrutement' })
-    .setTimestamp();
+  try {
+    await interaction.deferReply({ ephemeral: true });
+    
+    const embed = new EmbedBuilder()
+      .setColor('#0099ff')
+      .setTitle('Modérateur Test - Formulaire')
+      .setDescription('**Questions à remplir:**\n\n1️⃣ Quel est votre nom Roblox?\n2️⃣ Depuis combien de temps jouez-vous au RP?\n3️⃣ Pourquoi voulez-vous être modérateur?\n4️⃣ Avez-vous de l\'expérience en modération?\n5️⃣ Décrivez une situation où vous avez dû gérer un conflit.\n6️⃣ Avez-vous des références?')
+      .setFooter({ text: 'Verlaine RP - Recrutement' })
+      .setTimestamp();
 
-  const button = new ActionRowBuilder()
-    .addComponents(
-      new ButtonBuilder()
-        .setCustomId('submit_mod')
-        .setLabel('Envoyer la candidature')
-        .setStyle(ButtonStyle.Success)
-    );
+    const button = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setCustomId('submit_mod')
+          .setLabel('Envoyer la candidature')
+          .setStyle(ButtonStyle.Success)
+      );
 
-  await interaction.reply({ embeds: [embed], components: [button], ephemeral: true });
+    await interaction.editReply({ embeds: [embed], components: [button] });
+  } catch (error) {
+    console.error('Erreur showModForm:', error);
+  }
 }
 
 async function showDevForm(interaction) {
-  const embed = new EmbedBuilder()
-    .setColor('#0099ff')
-    .setTitle('Développeur - Formulaire')
-    .setDescription('**Questions à remplir:**\n\n1️⃣ Quel est votre nom Roblox?\n2️⃣ Quels sont vos langages de programmation?\n3️⃣ Avez-vous des projets antérieurs?\n4️⃣ Lien vers votre portfolio/GitHub?\n5️⃣ Quels services pouvez-vous offrir?\n6️⃣ Tarifs/propositions?')
-    .setFooter({ text: 'Verlaine RP - Recrutement' })
-    .setTimestamp();
+  try {
+    await interaction.deferReply({ ephemeral: true });
+    
+    const embed = new EmbedBuilder()
+      .setColor('#0099ff')
+      .setTitle('Développeur - Formulaire')
+      .setDescription('**Questions à remplir:**\n\n1️⃣ Quel est votre nom Roblox?\n2️⃣ Quels sont vos langages de programmation?\n3️⃣ Avez-vous des projets antérieurs?\n4️⃣ Lien vers votre portfolio/GitHub?\n5️⃣ Quels services pouvez-vous offrir?\n6️⃣ Tarifs/propositions?')
+      .setFooter({ text: 'Verlaine RP - Recrutement' })
+      .setTimestamp();
 
-  const button = new ActionRowBuilder()
-    .addComponents(
-      new ButtonBuilder()
-        .setCustomId('submit_dev')
-        .setLabel('Envoyer la candidature')
-        .setStyle(ButtonStyle.Success)
-    );
+    const button = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setCustomId('submit_dev')
+          .setLabel('Envoyer la candidature')
+          .setStyle(ButtonStyle.Success)
+      );
 
-  await interaction.reply({ embeds: [embed], components: [button], ephemeral: true });
+    await interaction.editReply({ embeds: [embed], components: [button] });
+  } catch (error) {
+    console.error('Erreur showDevForm:', error);
+  }
 }
 
 async function showComForm(interaction) {
-  const embed = new EmbedBuilder()
-    .setColor('#0099ff')
-    .setTitle('Communication - Formulaire')
-    .setDescription('**Questions à remplir:**\n\n1️⃣ Quel est votre nom Roblox?\n2️⃣ Avez-vous de l\'expérience en communication?\n3️⃣ Pourquoi voulez-vous rejoindre l\'équipe communication?\n4️⃣ Quels réseaux sociaux maîtrisez-vous?\n5️⃣ Avez-vous des exemples de votre travail?\n6️⃣ Disponibilité hebdomadaire?')
-    .setFooter({ text: 'Verlaine RP - Recrutement' })
-    .setTimestamp();
+  try {
+    await interaction.deferReply({ ephemeral: true });
+    
+    const embed = new EmbedBuilder()
+      .setColor('#0099ff')
+      .setTitle('Communication - Formulaire')
+      .setDescription('**Questions à remplir:**\n\n1️⃣ Quel est votre nom Roblox?\n2️⃣ Avez-vous de l\'expérience en communication?\n3️⃣ Pourquoi voulez-vous rejoindre l\'\u00e9quipe communication?\n4️⃣ Quels réseaux sociaux maîtrisez-vous?\n5️⃣ Avez-vous des exemples de votre travail?\n6️⃣ Disponibilité hebdomadaire?')
+      .setFooter({ text: 'Verlaine RP - Recrutement' })
+      .setTimestamp();
 
-  const button = new ActionRowBuilder()
-    .addComponents(
-      new ButtonBuilder()
-        .setCustomId('submit_com')
-        .setLabel('Envoyer la candidature')
-        .setStyle(ButtonStyle.Success)
-    );
+    const button = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setCustomId('submit_com')
+          .setLabel('Envoyer la candidature')
+          .setStyle(ButtonStyle.Success)
+      );
 
-  await interaction.reply({ embeds: [embed], components: [button], ephemeral: true });
+    await interaction.editReply({ embeds: [embed], components: [button] });
+  } catch (error) {
+    console.error('Erreur showComForm:', error);
+  }
 }
 
 async function createTicket(interaction, type) {

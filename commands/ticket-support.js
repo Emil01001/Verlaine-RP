@@ -9,7 +9,7 @@ export default {
     const embed = new EmbedBuilder()
       .setColor('#0099ff')
       .setTitle('Support VRP - Île de France RP')
-      .setDescription('Bienvenue dans le support de Île de France RP !\n\nPour soumettre une demande, **cliquez** simplement sur le bouton ci-dessous. Une fois le ticket créé, merci de fournir **toutes** les informations nécessaires afin que notre équipe puisse vous aider **rapidement** et **efficacement**.\n\n> Le règlement reste valable, même dans les tickets.')
+      .setDescription('Bienvenue dans le support de Île de France RP !\n\nPour soumettre une demande, **cliquez** simplement sur le bouton ci-dessous. Une fois le ticket créé, merci de fournir **toutes** les informations nécessaires afin que notre équipe puisse vous aider **rapidement** et **efficacement**.\n\n> Le règlement reste valable, même dans les tickets.\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n<:emoji_21:1506748481518305491> Administration\n<:partenariat:1505190484992069682> Partenariat développement\nTicket Autre')
       .setThumbnail('https://cdn.discordapp.com/emojis/1505190731386720387.png')
       .setFooter({ text: 'Verlaine RP - Support' })
       .setTimestamp();
