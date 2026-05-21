@@ -9,7 +9,7 @@ export default {
     const embed = new EmbedBuilder()
       .setColor('#0099ff')
       .setTitle('Recrutement - Verlaine Roleplay')
-      .setDescription('Bienvenue dans le système de recrutement staff.\n\nChoisissez la catégorie qui vous intéresse dans le menu ci-dessous, puis remplissez le formulaire.\n\n**Catégories disponibles :**\n- Modérateur Test\n*(ouvert)*\n- Développeur\n*(ouvert)*\n- Communication\n*(ouvert)*\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n<:staff_2:1504962828019437738> Modérateur Test\n<:developpement:1505204315814363307> Développeur\n<:com:1505241226083831848> Communication')
+      .setDescription('Bienvenue dans le système de recrutement staff.\n\nChoisissez la catégorie qui vous intéresse dans le menu ci-dessous, puis remplissez le formulaire.\n\n**Catégories disponibles :**\n- Modérateur Test\n*(ouvert)*\n- Développeur\n*(ouvert)*\n- Communication\n*(ouvert)*')
       .setFooter({ text: 'Verlaine RP - Recrutement' })
       .setTimestamp();
 

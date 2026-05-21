@@ -56,6 +56,7 @@ export async function handleTicketButtons(client) {
 async function showAdminForm(interaction) {
   try {
     await interaction.deferReply({ ephemeral: true });
+    await new Promise(r => setTimeout(r, 500));
     
     const embed = new EmbedBuilder()
       .setColor('#0099ff')
@@ -81,6 +82,7 @@ async function showAdminForm(interaction) {
 async function showPartnerForm(interaction) {
   try {
     await interaction.deferReply({ ephemeral: true });
+    await new Promise(r => setTimeout(r, 500));
     
     const embed = new EmbedBuilder()
       .setColor('#0099ff')
@@ -106,6 +108,7 @@ async function showPartnerForm(interaction) {
 async function showOtherForm(interaction) {
   try {
     await interaction.deferReply({ ephemeral: true });
+    await new Promise(r => setTimeout(r, 500));
     
     const embed = new EmbedBuilder()
       .setColor('#0099ff')
@@ -131,6 +134,7 @@ async function showOtherForm(interaction) {
 async function showModForm(interaction) {
   try {
     await interaction.deferReply({ ephemeral: true });
+    await new Promise(r => setTimeout(r, 500));
     
     const embed = new EmbedBuilder()
       .setColor('#0099ff')
@@ -156,6 +160,7 @@ async function showModForm(interaction) {
 async function showDevForm(interaction) {
   try {
     await interaction.deferReply({ ephemeral: true });
+    await new Promise(r => setTimeout(r, 500));
     
     const embed = new EmbedBuilder()
       .setColor('#0099ff')
@@ -181,6 +186,7 @@ async function showDevForm(interaction) {
 async function showComForm(interaction) {
   try {
     await interaction.deferReply({ ephemeral: true });
+    await new Promise(r => setTimeout(r, 500));
     
     const embed = new EmbedBuilder()
       .setColor('#0099ff')
