@@ -6,6 +6,7 @@ import { handleTicketUltra } from './events/ticket-ultra-handler.js';
 import { handleWelcomeUltra, handleBoostUltra } from './events/welcome-ultra.js';
 import { handleNotificationsUltra } from './events/notifications-ultra.js';
 import { handleRoleMenu } from './events/role-handler.js';
+import { handleNotificationMenu } from './events/notification-handler.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -114,6 +115,7 @@ client.on('ready', () => {
   handleBoostUltra(client);
   handleNotificationsUltra(client);
   handleRoleMenu(client);
+  handleNotificationMenu(client);
   
   client.user.setActivity('Verlaine Rôleplay', { type: 'WATCHING' });
 });
