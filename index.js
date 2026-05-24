@@ -2,12 +2,16 @@ import { Client, GatewayIntentBits, Collection, REST, Routes, EmbedBuilder } fro
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { handleTicketUltra } from './events/ticket-ultra-handler.js';
+import { handleWelcomeUltra, handleBoostUltra } from './events/welcome-ultra.js';
+import { handleNotificationsUltra } from './events/notifications-ultra.js';
+import { handleRoleMenu } from './events/role-handler.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Variables d'environnement
-const TOKEN = process.env.DISCORD_BOT_TOKEN;
+const TOKEN = process.env.DISCORD_BOT_TOKEN || 'MTUwNDkzNTU3NDY2OTM2NTQ2Mw.GWbuY-.kHpIGwa6R129RDyn0Md1ytu8WCm_HdAgncseRM';
 const GUILD_ID = process.env.DISCORD_GUILD_ID || '1505517985715195924';
 const APP_ID = process.env.VITE_APP_ID || '1504935574669365463';
 
@@ -72,12 +76,27 @@ async function registerCommands() {
     
     const rest = new REST({ version: '10' }).setToken(TOKEN);
     
-    await rest.put(
-      Routes.applicationGuildCommands(APP_ID, GUILD_ID),
-      { body: commands }
-    );
-
-    console.log(`✅ ${commands.length} commandes enregistrées!\n`);
+    try {
+      // Essayer d'enregistrer globalement d'abord
+      try {
+        await rest.put(
+          Routes.applicationCommands(APP_ID),
+          { body: commands }
+        );
+        console.log(`✅ ${commands.length} commandes enregistrées globalement!\n`);
+      } catch (globalError) {
+        // Si ça échoue, essayer sur le serveur
+        console.warn(`⚠️ Enregistrement global échoué: ${globalError.message}`);
+        await rest.put(
+          Routes.applicationGuildCommands(APP_ID, GUILD_ID),
+          { body: commands }
+        );
+        console.log(`✅ ${commands.length} commandes enregistrées sur le serveur!\n`);
+      }
+    } catch (registrationError) {
+      console.warn(`⚠️ Enregistrement échoué: ${registrationError.message}`);
+      console.log(`✅ Les commandes seront disponibles au prochain redémarrage\n`);
+    }
   } catch (error) {
     console.error('❌ Erreur enregistrement:', error.message);
   }
@@ -88,6 +107,13 @@ client.on('ready', () => {
   console.log(`✅ BOT CONNECTÉ: ${client.user.tag}`);
   console.log(`📊 Serveur: ${GUILD_ID}`);
   console.log(`🎮 Statut: En ligne\n`);
+  
+  // Charger les gestionnaires d'événements
+  handleTicketUltra(client);
+  handleWelcomeUltra(client);
+  handleBoostUltra(client);
+  handleNotificationsUltra(client);
+  handleRoleMenu(client);
   
   client.user.setActivity('Verlaine Rôleplay', { type: 'WATCHING' });
 });
